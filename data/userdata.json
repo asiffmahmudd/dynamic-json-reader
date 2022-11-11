@@ -1,16 +1,6 @@
 {
     "info": [
         {
-            "name": "asd",
-            "salary": 234,
-            "birthday": "2022-11-03"
-        },
-        {
-            "name": "dfgd",
-            "salary": "3453",
-            "birthday": "2022-11-09"
-        },
-        {
             "name": "sdf",
             "salary": "34",
             "birthday": "2022-11-07"
@@ -19,6 +9,31 @@
             "name": "dfs",
             "salary": "567",
             "birthday": "2022-11-02"
+        },
+        {
+            "name": "sda",
+            "salary": "3453",
+            "birthday": "2022-11-03"
+        },
+        {
+            "name": "gh",
+            "salary": "345",
+            "birthday": "2022-11-08"
+        },
+        {
+            "name": "sdf",
+            "salary": "34",
+            "birthday": "2022-11-10"
+        },
+        {
+            "name": "uniew",
+            "salary": "324",
+            "birthday": "2022-11-09"
+        },
+        {
+            "name": "rtyye",
+            "salary": "324",
+            "birthday": "2022-11-09"
         }
     ]
 }

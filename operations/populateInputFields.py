@@ -1,7 +1,5 @@
 import globalStore.globals as globals
 
 def populateInputFields(data):
-    name, salary, birthday = data
-    globals.window['-NAME-'].update(name)
-    globals.window['-SALARY-'].update(salary)
-    globals.window['-BIRTHDAY-'].update(birthday)
+    for i in range(len(data)):
+        globals.modalwindow["-input"+str(i)+"-"].update(list(data)[i])

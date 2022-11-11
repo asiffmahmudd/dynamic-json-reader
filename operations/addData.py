@@ -1,7 +1,7 @@
 from operations.clearInputs import clearInputs
 from operations.writeToJSON import writeToJSON
 from validation.validation import isValid
-# from operations.updateTableData import updateTableData
+from operations.updateTableData import updateTableData
 import PySimpleGUI as sg
 import globalStore.globals as globals
 
@@ -11,6 +11,7 @@ def addData(values):
         sg.popup(errorMsg)
     else:
         writeToJSON(validData)
-        clearInputs()#list(values.keys())[:len(data.keys())])
-        # globals.info.append(data)
-        # updateTableData()
+        clearInputs()
+        listKey = list(globals.data.keys())[0]
+        globals.data[listKey].append(validData)
+        updateTableData()

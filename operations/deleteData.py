@@ -3,7 +3,8 @@ from operations.updateTableData import updateTableData
 from operations.updateInJSON import updateInJSON
 
 def deleteData(index):
-    globals.info.remove(globals.info[index])
+    listKey = list(globals.data.keys())[0]
+    globals.data[listKey].remove(globals.data[listKey][index])
     updateInJSON()
     updateTableData()
     
