@@ -3,14 +3,15 @@ from operations.updateTableData import updateTableData
 from operations.updateInJSON import updateInJSON
 from validation.validation import isValid
 from operations.clearInputs import clearInputs
+import PySimpleGUI as sg
 
 def updateData(index):
-    if isValid(globals.values):
-        data = {}
-        data["name"] = globals.values["-NAME-"]
-        data["salary"] = globals.values["-SALARY-"]
-        data["birthday"] = globals.values["-BIRTHDAY-"]
-        globals.info[index] = data
+    errorCode, errorMsg, validData = isValid(globals.values)
+    if errorCode == 1:
+        sg.popup(errorMsg)
+    else:
+        listKey = list(globals.data.keys())[0]
+        globals.data[listKey][index] = validData
         updateInJSON()
         updateTableData()
         clearInputs()

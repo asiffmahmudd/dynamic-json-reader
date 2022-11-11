@@ -5,7 +5,7 @@ from layout.createDynamicLayout.createDynamicLayout import createDynamicLayout
 from operations.addData import addData
 from operations.populateInputFields import populateInputFields
 from operations.deleteData import deleteData
-# from operations.updateData import updateData
+from operations.updateData import updateData
 from operations.clearInputs import clearInputs
 
 selectedIndex = -1
@@ -14,14 +14,13 @@ def handleEvents(event, values):
     if event == '-ADD_BTN-':
         addData(values)
     elif event == '-UPDATE_BTN-':
-        print('update')
-        # if selectedIndex > -1:
-        #     isUpdated = updateData(selectedIndex)
-        #     if isUpdated:
-        #         sg.popup("Update successful!")
-        #         selectedIndex = -1
-        # else:
-        #     sg.popup("No row selected from the table")
+        if selectedIndex > -1:
+            isUpdated = updateData(selectedIndex)
+            if isUpdated:
+                sg.popup("Update successful!")
+                selectedIndex = -1
+        else:
+            sg.popup("No row selected from the table")
     elif event == '-DELETE_BTN-':
         if selectedIndex > -1:
             deleteData(selectedIndex)

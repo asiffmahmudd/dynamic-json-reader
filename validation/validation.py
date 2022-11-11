@@ -19,13 +19,14 @@ def isValid(values):
             if not isInt(values[inputKey]):
                 errorCode = 1
                 errorMsg += fields[i] + " is invalid!\n"
+            else:
+                validData[fields[i]] = int(values[inputKey])
         elif globals.dataTypes[inputKey] == 'date':
             if not isDate(values[inputKey]):
                 errorCode = 1
                 errorMsg += fields[i] + " is invalid!\n"
-        
-        if errorCode != 1:
+            else:
+                validData[fields[i]] = values[inputKey]
+        else:
             validData[fields[i]] = values[inputKey]
-                
-
     return [errorCode, errorMsg, validData]
