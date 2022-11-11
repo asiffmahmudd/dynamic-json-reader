@@ -13,6 +13,8 @@ def readJSONFile(filePath):
         f.close()
         
         globals.data = jsondata
+        listObject = list(jsondata.keys())[0]
+        globals.inputKeys = list(globals.data[listObject][0].keys())
         return jsondata
     except:
         return []
