@@ -6,7 +6,8 @@ from operations.processDataForTable import processDataForTable
 #function: Edit tab layout for editing users
 def createTableLayout():
     text_style = default_text_style()
-    data = globals.data['info']
+    listKey = list(globals.data.keys())[0]
+    data = globals.data[listKey]
 
     data_headings = []
     if len(data) > 0:

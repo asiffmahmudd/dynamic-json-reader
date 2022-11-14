@@ -48,7 +48,6 @@ def getField(value, index):
                 sg.Radio(
                     'True', 
                     inputKey, 
-                    default=True, 
                     font=input_style["font"], 
                     pad=input_style["pad"],
                     key=inputKey
@@ -57,6 +56,7 @@ def getField(value, index):
                     'False',
                     inputKey,
                     font=input_style["font"], 
-                    pad=input_style["pad"]
+                    pad=input_style["pad"],
+                    key=inputKey
                 )
             ]

@@ -1,39 +1,10 @@
 {
-    "info": [
+    "asd": [
         {
             "name": "sdf",
             "salary": 34,
-            "birthday": "2022-11-07"
-        },
-        {
-            "name": "hty",
-            "salary": 567,
-            "birthday": "2022-11-02"
-        },
-        {
-            "name": "erd",
-            "salary": 685,
-            "birthday": "2022-11-15"
-        },
-        {
-            "name": "sdf",
-            "salary": 34,
-            "birthday": "2022-11-10"
-        },
-        {
-            "name": "rtyye",
-            "salary": 324,
-            "birthday": "2022-11-09"
-        },
-        {
-            "name": "sdf",
-            "salary": 34,
-            "birthday": "2022-11-10"
-        },
-        {
-            "name": "erd",
-            "salary": 685,
-            "birthday": "2022-11-15"
+            "birthday": "2022-11-07",
+            "active": false
         }
     ]
 }
