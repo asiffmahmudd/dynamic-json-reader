@@ -2,14 +2,15 @@
 import PySimpleGUI as sg
 from layout.dynamicLayout import dynamicLayout
 from operations.connectToDatabase import connectToDatabase
+from operations.addData import addData
 import globalStore.globals as globals
 
 selectedIndex = -1
 def handleEvents(event, values):
     global selectedIndex
     if event == '-ADD_BTN-':
-        # addData(values)
         print("add")
+        # addData(values)
     elif event == '-UPDATE_BTN-':
         print("update")
         # if selectedIndex > -1:
@@ -52,4 +53,5 @@ if __name__ == "__main__":
         if event == sg.WIN_CLOSED or event == 'Cancel': # if user closes window or clicks cancel
             break
         handleEvents(event, values)
+    print(globals.baseStruct)
     window.close()

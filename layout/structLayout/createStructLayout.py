@@ -2,6 +2,7 @@ from operations.getStructFromMongo import getStructFromMongo
 from operations.getDropDownValues import getDropDownValues
 import PySimpleGUI as sg
 from styles.defaultStyles import default_text_style
+import globalStore.globals as globals
 
 def createStructLayout(structName):
     record = getStructFromMongo(structName)
@@ -10,6 +11,7 @@ def createStructLayout(structName):
     inputFields = []
     temp = []
     for inputKey, value in record.items():
+        globals.baseStruct[inputKey] = value
         temp.append(
             sg.Text(
                 inputKey,
