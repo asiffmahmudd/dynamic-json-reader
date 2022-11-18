@@ -4,7 +4,7 @@ from operations.deleteFromMongoDB import deleteFromMongoDB
 # from operations.updateInJSON import updateInJSON
 
 def deleteData(index):
-    globals.data.remove(globals.data[index])
     deleteFromMongoDB(globals.data[index]["_id"])
+    globals.data.remove(globals.data[index])
     updateTableData()
     

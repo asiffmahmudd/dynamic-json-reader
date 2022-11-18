@@ -10,4 +10,4 @@ def connectToDatabase():
     client = MongoClient(globals.config['Mongo']['ParentConnStr'])
 
     #Getting the database instance
-    globals.database = client["file-reader"]
+    globals.database = client["PERIPHERALS"]
