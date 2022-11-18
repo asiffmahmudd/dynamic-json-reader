@@ -6,7 +6,10 @@ from operations.addData import addData
 import globalStore.globals as globals
 from operations.getHistory import getHistory
 from operations.updateTableData import updateTableData
-from operations.processDataForTable import processDataForTable
+from operations.updateData import updateData
+from operations.populateInputFields import populateInputFields
+from operations.clearInputs import clearInputs
+from operations.deleteData import deleteData
 
 selectedIndex = -1
 def handleEvents(event, values):
@@ -14,31 +17,28 @@ def handleEvents(event, values):
     if event == '-ADD_BTN-':
         addData(values)
     elif event == '-UPDATE_BTN-':
-        print("update")
-        # if selectedIndex > -1:
-        #     isUpdated = updateData(selectedIndex)
-        #     if isUpdated:
-        #         sg.popup("Update successful!")
-        #         selectedIndex = -1
-        # else:
-        #     sg.popup("No row selected from the table")
+        if selectedIndex > -1:
+            isUpdated = updateData(selectedIndex)
+            if isUpdated:
+                sg.popup("Update successful!")
+                selectedIndex = -1
+        else:
+            sg.popup("No row selected from the table")
     elif event == '-DELETE_BTN-':
-        print("delete")
-        # if selectedIndex > -1:
-        #     deleteData(selectedIndex)
-        #     clearInputs()
-        #     sg.popup("Deleted successfully!")
-        # else:
-        #     sg.popup("No row selected from the table")
-        # selectedIndex = -1
+        if selectedIndex > -1:
+            deleteData(selectedIndex)
+            clearInputs()
+            sg.popup("Deleted successfully!")
+        else:
+            sg.popup("No row selected from the table")
+        selectedIndex = -1
     elif event == '-INFO_TABLE-':
-        print("table")
-        # try:
-        #     selectedIndex = values['-INFO_TABLE-'][0]
-        #     selectedData = globals.data[list(globals.data.keys())[0]][selectedIndex]
-        #     populateInputFields(selectedData.values())
-        # except Exception as e:
-        #     return
+        try:
+            selectedIndex = values['-INFO_TABLE-'][0]
+            selectedData = globals.data[selectedIndex]
+            populateInputFields(selectedData)
+        except Exception as e:
+            return
     elif event == globals.primaryKey:
         globals.data = []
         getHistory(globals.primaryKey, values[event])

@@ -10,7 +10,7 @@ def isValid(values):
     errorCode = 0
     # print(values)
     for inputKey in fields:
-        if inputKey == "_id":
+        if inputKey == '_id':
             continue
         if globals.historyStruct[inputKey]["required"] == "true" and isEmpty(values[inputKey]):
             errorCode = 1
