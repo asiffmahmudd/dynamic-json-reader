@@ -4,15 +4,17 @@ from styles.defaultStyles import default_text_style
 from operations.processDataForTable import processDataForTable
 from operations.getStructFromMongo import getStructFromMongo
 from operations.getHistory import getHistory
+from operations.getDropDownValues import getDropDownValues
 
 #function: Edit tab layout for editing users
 def createTableLayout():
     text_style = default_text_style()
     record = getStructFromMongo(globals.historyStructCollection)
+    record.pop("_id")
     data_headings = list(record.keys())
-    data_headings.pop(0)
     
-    data = getHistory()
+    keyValue = getDropDownValues(globals.primaryKey)[0]
+    data = getHistory(globals.primaryKey, keyValue)
     tableData = processDataForTable(data)
     
     return [

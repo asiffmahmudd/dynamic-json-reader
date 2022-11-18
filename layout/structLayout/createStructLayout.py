@@ -4,19 +4,18 @@ import PySimpleGUI as sg
 from styles.defaultStyles import default_text_style
 import globalStore.globals as globals
 
-def createStructLayout(structName):
-    record = getStructFromMongo(structName)
+def createStructLayout(record):
+    
     text_style = default_text_style()
     record.pop('_id')
     inputFields = []
     temp = []
     for inputKey, value in record.items():
-        globals.baseStruct[inputKey] = value
         temp.append(
             sg.Text(
                 inputKey,
                 font=text_style["font"],
-                size =text_style["size"]
+                size =text_style["size"],
             )
         )
         if (value["type"] == 'dropdown'):
@@ -26,6 +25,8 @@ def createStructLayout(structName):
                     dropDownValues,
                     key = inputKey,
                     font=text_style["font"], 
+                    default_value=dropDownValues[0],
+                    enable_events=True
                 )
             )
         elif (value["type"] == 'textfield'):

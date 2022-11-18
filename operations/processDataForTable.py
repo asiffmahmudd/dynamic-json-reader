@@ -1,7 +1,8 @@
 def processDataForTable(data): 
     temp = []
     for row in data:
-        row.pop("_id")
+        if "_id" in list(row.keys()):
+            row.pop("_id")
         rowData = []
         for val in row.values(): 
             rowData.append(val)

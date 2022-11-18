@@ -4,13 +4,15 @@ from layout.dynamicLayout import dynamicLayout
 from operations.connectToDatabase import connectToDatabase
 from operations.addData import addData
 import globalStore.globals as globals
+from operations.getHistory import getHistory
+from operations.updateTableData import updateTableData
+from operations.processDataForTable import processDataForTable
 
 selectedIndex = -1
 def handleEvents(event, values):
     global selectedIndex
     if event == '-ADD_BTN-':
-        print("add")
-        # addData(values)
+        addData(values)
     elif event == '-UPDATE_BTN-':
         print("update")
         # if selectedIndex > -1:
@@ -37,7 +39,12 @@ def handleEvents(event, values):
         #     populateInputFields(selectedData.values())
         # except Exception as e:
         #     return
-
+    elif event == globals.primaryKey:
+        globals.data = []
+        getHistory(globals.primaryKey, values[event])
+        updateTableData()
+        # for d in data:
+        #     print(d)
 
 #function: main function. the app starts here
 if __name__ == "__main__":  
@@ -45,13 +52,12 @@ if __name__ == "__main__":
 
     layout = dynamicLayout()
     
-    window = sg.Window('Dynamic CRUD', layout)
+    globals.window = sg.Window('Dynamic CRUD', layout)
     while True:
 
-        event, values = window.read()
+        globals.event, globals.values = globals.window.read()
 
-        if event == sg.WIN_CLOSED or event == 'Cancel': # if user closes window or clicks cancel
+        if globals.event == sg.WIN_CLOSED or globals.event == 'Cancel': # if user closes window or clicks cancel
             break
-        handleEvents(event, values)
-    print(globals.baseStruct)
-    window.close()
+        handleEvents(globals.event, globals.values)
+    globals.window.close()
