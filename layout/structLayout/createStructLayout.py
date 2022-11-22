@@ -9,50 +9,51 @@ def createStructLayout(record):
     text_style = default_text_style()
     record.pop('_id')
     inputFields = []
-    temp = []
+    col1 = []
+    col2 = []
+
     for inputKey, value in record.items():
-        temp.append(
-            sg.Text(
-                inputKey,
+        text = inputKey.replace("_", " ").title()
+    
+        col1.append(
+            [sg.Push(),sg.Text(
+                text,
                 font=text_style["font"],
-                size =text_style["size"],
-            )
+            )]
         )
         if (value["type"] == 'dropdown'):
             dropDownValues = getDropDownValues(inputKey)
-            temp.append(
-                sg.Combo(
+            col2.append(
+                [sg.Combo(
                     dropDownValues,
                     key = inputKey,
                     font=text_style["font"], 
                     default_value=dropDownValues[0],
                     enable_events=True
-                )
+                )]
             )
         elif (value["type"] == 'textfield'):
-            temp.append(
-                sg.InputText(
+            col2.append(
+                [sg.InputText(
                     key = inputKey,
                     font=text_style["font"], 
-                )
+                )]
             )
         elif (value["type"] == "date"):
-            temp.append(
-                sg.InputText(
+            col2.append(
+                [sg.InputText(
                     key=inputKey, 
                     disabled=True, 
                     font=text_style["font"], 
-                )
-            )
-            temp.append(
+                ),
                 sg.CalendarButton(
                     "Date", 
                     close_when_date_chosen="True",  
                     target=inputKey, 
                     no_titlebar=False, 
-                    font=("Arial", 15)
-                )
+                    font=("Arial", 12),
+                    size=(10,1)
+                )]
             )
-        inputFields.append(temp)
-        temp = []
+    inputFields.append([sg.Column(col1), sg.Column(col2)])
     return inputFields
