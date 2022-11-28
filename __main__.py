@@ -1,6 +1,6 @@
 
 import PySimpleGUI as sg
-from layout.dynamicLayout import dynamicLayout
+from layout.historyLayout import historyLayout
 from operations.connectToDatabase import connectToDatabase
 from operations.addData import addData
 import globalStore.globals as globals
@@ -10,13 +10,15 @@ from operations.updateData import updateData
 from operations.populateInputFields import populateInputFields
 from operations.clearInputs import clearInputs
 from operations.deleteData import deleteData
+from operations.toggleCrud import toggleCrud
+from layout.baseLayout import baseLayout
 
 selectedIndex = -1
 def handleEvents(event, values):
     global selectedIndex
-    if event == '-ADD_BTN-':
+    if event == '-ADD_BTN-history':
         addData(values)
-    elif event == '-UPDATE_BTN-':
+    elif event == '-UPDATE_BTN-history':
         if selectedIndex > -1:
             isUpdated = updateData(selectedIndex)
             if isUpdated:
@@ -24,7 +26,7 @@ def handleEvents(event, values):
                 selectedIndex = -1
         else:
             sg.popup("No row selected from the table")
-    elif event == '-DELETE_BTN-':
+    elif event == '-DELETE_BTN-history':
         if selectedIndex > -1:
             deleteData(selectedIndex)
             clearInputs()
@@ -42,22 +44,30 @@ def handleEvents(event, values):
     elif event == globals.primaryKey:
         globals.data = []
         getHistory(globals.primaryKey, values[event])
+        clearInputs()
+        selectedIndex = -1
         updateTableData()
-        # for d in data:
-        #     print(d)
+    elif event == '-TOGGLE_CRUD-' or event == '-TOGGLE_CRUD-1':
+        clearInputs()
+        toggleCrud()
 
 #function: main function. the app starts here
 if __name__ == "__main__":  
     connectToDatabase()
 
-    layout = dynamicLayout()
+    layout = [
+        [
+            sg.Column(historyLayout(), visible=True, key='-HISTORY_LAYOUT-'), 
+            sg.Column(baseLayout(), visible=False, key='-BASE_LAYOUT-')
+        ]
+    ]
     
     globals.window = sg.Window('Dynamic CRUD', layout)
     while True:
 
         globals.event, globals.values = globals.window.read()
-
-        if globals.event == sg.WIN_CLOSED or globals.event == 'Cancel': # if user closes window or clicks cancel
+        print(globals.event)
+        if globals.event == sg.WIN_CLOSED or globals.event == 'Cancel' or globals.event == 'Cancel0': # if user closes window or clicks cancel
             break
         handleEvents(globals.event, globals.values)
     globals.window.close()

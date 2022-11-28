@@ -5,9 +5,8 @@ import PySimpleGUI as sg
 import globalStore.globals as globals
 from operations.getStructFromMongo import getStructFromMongo
 
-def dynamicLayout():
-    buttonMenu = buttonM()
-
+def historyLayout():
+    buttonMenu = buttonM('history')
     baseStructRecord = getStructFromMongo(globals.baseStructCollection)
     globals.primaryKey = list(baseStructRecord.keys())[1]
     globals.baseStruct = saveStruct(baseStructRecord)
@@ -20,7 +19,7 @@ def dynamicLayout():
     historyStructLayout = createStructLayout(historyStructRecord)
     tableLayout = createTableLayout()
 
-    layout = buttonMenu + baseStructLayout + [[sg.HSeparator(pad=(5,5))]] + historyStructLayout + tableLayout
+    layout = buttonMenu + [[sg.Frame('Base',baseStructLayout)]] + [[sg.Frame('History',historyStructLayout)]] + tableLayout
     return layout
 
 def saveStruct(record):

@@ -10,3 +10,4 @@ event = None
 value = None
 window = None
 data = []
+cathod_history_active = True
