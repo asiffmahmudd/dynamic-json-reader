@@ -12,13 +12,14 @@ from operations.clearInputs import clearInputs
 from operations.deleteData import deleteData
 from operations.toggleCrud import toggleCrud
 from layout.baseLayout import baseLayout
+from operations.base.addBaseData import addBaseData
 
 selectedIndex = -1
 def handleEvents(event, values):
     global selectedIndex
-    if event == '-ADD_BTN-history':
+    if event == '-ADD_BTN-':
         addData(values)
-    elif event == '-UPDATE_BTN-history':
+    elif event == '-UPDATE_BTN-':
         if selectedIndex > -1:
             isUpdated = updateData(selectedIndex)
             if isUpdated:
@@ -26,7 +27,7 @@ def handleEvents(event, values):
                 selectedIndex = -1
         else:
             sg.popup("No row selected from the table")
-    elif event == '-DELETE_BTN-history':
+    elif event == '-DELETE_BTN-':
         if selectedIndex > -1:
             deleteData(selectedIndex)
             clearInputs()
@@ -44,12 +45,23 @@ def handleEvents(event, values):
     elif event == globals.primaryKey:
         globals.data = []
         getHistory(globals.primaryKey, values[event])
+        temp = None
+        for record in globals.baseRecord:
+            if record[globals.primaryKey] == values[event]:
+                temp = record
+        populateInputFields(temp)
         clearInputs()
         selectedIndex = -1
         updateTableData()
     elif event == '-TOGGLE_CRUD-' or event == '-TOGGLE_CRUD-1':
         clearInputs()
         toggleCrud()
+    elif event == '-ADD_BTN-base':
+        addBaseData(values)
+    elif event == '-UPDATE_BTN-base':
+        print("update")
+    elif event == '-DELETE_BTN-base':
+        print("Delte")    
 
 #function: main function. the app starts here
 if __name__ == "__main__":  

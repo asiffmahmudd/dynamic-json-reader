@@ -6,7 +6,7 @@ from operations.clearInputs import clearInputs
 import PySimpleGUI as sg
 
 def updateData(index):
-    errorCode, errorMsg, validData = isValid(globals.values)
+    errorCode, errorMsg, validData = isValid(globals.values, globals.historyStruct)
     if errorCode == 1:
         sg.popup(errorMsg)
     else:

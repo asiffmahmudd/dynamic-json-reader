@@ -1,14 +1,19 @@
 from layout.buttonMenu.buttonMenu import buttonM
-from layout.structLayout.createStructLayout import createStructLayout
+from layout.createBaseLayout import createBaseLayout
 from layout.createDynamicLayout.createTableLayout import createTableLayout
 import PySimpleGUI as sg
 import globalStore.globals as globals
 from operations.getStructFromMongo import getStructFromMongo
+from operations.base.getBaseRecordFromMongo import getBaseRecordFromMongo
+from layout.createDynamicLayout.createBaseTableLayout import createTableLayout
 
 def baseLayout():
     buttonMenu = buttonM('base')
-    print(globals.baseStruct)
-    layout = buttonMenu 
+    baseStructRecord = getStructFromMongo(globals.baseStructCollection)
+
+    baseLayout = createBaseLayout(baseStructRecord, "base")
+    tableLayout = createTableLayout('base')
+    layout = buttonMenu + baseLayout + tableLayout
     return layout
 
 def saveStruct(record):

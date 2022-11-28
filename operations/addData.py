@@ -8,11 +8,11 @@ from operations.writeToMongoDB import writeToMongoDB
 
 def addData(values):
     # isValid(values)
-    errorCode, errorMsg, validData = isValid(values)
+    errorCode, errorMsg, validData = isValid(values, globals.historyStruct)
     if errorCode == 1:
         sg.popup(errorMsg)
     else:
-        writeToMongoDB(validData)
+        writeToMongoDB(validData, globals.historyCollection)
         clearInputs()
         # listKey = list(globals.data.keys())[0]
         globals.data.append(validData)
