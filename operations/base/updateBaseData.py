@@ -38,7 +38,6 @@ def getNewDropDownValues(key):
     return result
 
 def updateGlobalHistoryData(oldVal, newVal):
-    print(oldVal, newVal)
     index = 0
     for doc in globals.data:
         if doc[globals.primaryKey] == oldVal:

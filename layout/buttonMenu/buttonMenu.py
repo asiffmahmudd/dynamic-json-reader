@@ -42,7 +42,7 @@ def buttonM(actionOn):
             ),
             sg.Push(),
             sg.Text(
-                'CRUD on Base:',
+                'CRUD on Parent:',
                 font=text_style["font"]
             ),
             sg.Image(

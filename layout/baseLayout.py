@@ -6,6 +6,7 @@ import globalStore.globals as globals
 from operations.getStructFromMongo import getStructFromMongo
 from operations.base.getBaseRecordFromMongo import getBaseRecordFromMongo
 from layout.createDynamicLayout.createBaseTableLayout import createTableLayout
+from layout.statusBar.createStatusBarLayout import createStatusBarLayout
 
 def baseLayout():
     buttonMenu = buttonM('base')
@@ -13,7 +14,9 @@ def baseLayout():
 
     baseLayout = createBaseLayout(baseStructRecord, "base")
     tableLayout = createTableLayout('base')
-    layout = buttonMenu + baseLayout + tableLayout
+    statuBarLayout = createStatusBarLayout("Parent")
+
+    layout = buttonMenu + baseLayout + tableLayout + statuBarLayout
     return layout
 
 def saveStruct(record):

@@ -5,6 +5,7 @@ import PySimpleGUI as sg
 import globalStore.globals as globals
 from operations.getStructFromMongo import getStructFromMongo
 from operations.base.getBaseRecordFromMongo import getBaseRecordFromMongo
+from layout.statusBar.createStatusBarLayout import createStatusBarLayout
 
 def historyLayout():
     buttonMenu = buttonM('')
@@ -23,8 +24,9 @@ def historyLayout():
     baseStructLayout = createStructLayout(baseStructRecord, "base")
     historyStructLayout = createStructLayout(historyStructRecord, "")
     tableLayout = createTableLayout()
+    statuBarLayout = createStatusBarLayout("Child")
 
-    layout = buttonMenu + [[sg.Frame('Cathod-Base',baseStructLayout)]] + [[sg.Frame('Cathod-History',historyStructLayout)]] + tableLayout
+    layout = buttonMenu + [[sg.Frame('Cathod-Base',baseStructLayout)]] + [[sg.Frame('Cathod-History',historyStructLayout)]] + tableLayout + statuBarLayout
     return layout
 
 def saveStruct(record):
