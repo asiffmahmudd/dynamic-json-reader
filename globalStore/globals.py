@@ -13,4 +13,3 @@ window = None
 data = []
 cathod_history_active = True
 baseRecord = []
-baseDate = []

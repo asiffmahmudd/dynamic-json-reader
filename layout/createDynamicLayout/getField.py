@@ -33,7 +33,7 @@ def getField(value, index):
                 sg.InputText(
                     key=inputKey, 
                     font=input_style["font"], 
-                    pad=input_style["pad"])
+                    pad=input_style["pad"]),
                 ]
         elif type(value) == list:
             return [

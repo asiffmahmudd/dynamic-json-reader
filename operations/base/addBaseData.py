@@ -1,4 +1,4 @@
-from operations.base.clearBaseInputs import clearInputs
+from operations.base.clearBaseInputs import clearBaseInputs
 # from operations.writeToJSON import writeToJSON
 from validation.validation import isValid
 from operations.base.updateBaseTableData import updateBaseTableData
@@ -20,8 +20,9 @@ def addBaseData(values):
                     globals.baseRecord.append(validData)
                     new_values = getNewDropDownValues(key)
                     globals.window[key].Update(values=new_values, value=new_values[0])
-        clearInputs("base")
+        clearBaseInputs("base")
         updateBaseTableData()
+        sg.popup("Added Successfully!")
 
 def getNewDropDownValues(key):
     result =[record[key] for record in globals.baseRecord]

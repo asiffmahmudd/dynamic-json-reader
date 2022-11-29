@@ -13,10 +13,13 @@ def createTableLayout():
     record.pop("_id")
     data_headings = list(record.keys())
     
-    keyValue = getDropDownValues(globals.primaryKey)[0]
-    data = getHistory(globals.primaryKey, keyValue)
-    tableData = processDataForTable(data)
-    
+    values = getDropDownValues(globals.primaryKey)
+    if len(values) > 0:
+        keyValue = values[0]
+        data = getHistory(globals.primaryKey, keyValue)
+        tableData = processDataForTable(data)
+    else:
+        tableData = ""
     return [
         [
             sg.Table(

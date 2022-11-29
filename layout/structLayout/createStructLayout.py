@@ -24,15 +24,25 @@ def createStructLayout(record, actionOn):
             )
             if (value["type"] == 'dropdown'):
                 dropDownValues = getDropDownValues(inputKey)
-                col2.append(
-                    [sg.Combo(
-                        dropDownValues,
-                        key = inputKey,
-                        font=text_style["font"], 
-                        default_value=dropDownValues[0],
-                        enable_events=True
-                    )]
-                )
+                try:
+                    col2.append(
+                        [sg.Combo(
+                            dropDownValues,
+                            key = inputKey,
+                            font=text_style["font"], 
+                            default_value=dropDownValues[0],
+                            enable_events=True
+                        )]
+                    )
+                except:
+                    col2.append(
+                        [sg.Combo(
+                            dropDownValues,
+                            key = inputKey,
+                            font=text_style["font"], 
+                            enable_events=True
+                        )]
+                    )
             elif (value["type"] == 'textfield'):
                 col2.append(
                     [sg.InputText(
@@ -68,33 +78,61 @@ def createStructLayout(record, actionOn):
             )
             if (value["type"] == 'dropdown'):
                 dropDownValues = getDropDownValues(inputKey)
-                col2.append(
-                    [sg.Combo(
-                        dropDownValues,
-                        key = inputKey,
-                        font=text_style["font"], 
-                        default_value=dropDownValues[0],
-                        enable_events=True
-                    )]
-                )
+                try:
+                    col2.append(
+                        [sg.Combo(
+                            dropDownValues,
+                            key = inputKey,
+                            font=text_style["font"], 
+                            default_value=dropDownValues[0],
+                            enable_events=True
+                        )]
+                    )
+                except:
+                    col2.append(
+                        [sg.Combo(
+                            dropDownValues,
+                            key = inputKey,
+                            font=text_style["font"], 
+                            enable_events=True
+                        )]
+                    )
             elif (value["type"] == 'textfield'):
-                col2.append(
-                    [sg.InputText(
-                        key = inputKey,
-                        font=text_style["font"],
-                        default_text=globals.baseRecord[0][inputKey], 
-                        disabled=True 
-                    )]
-                )
+                try:
+                    col2.append(
+                        [sg.InputText(
+                            key = inputKey,
+                            font=text_style["font"],
+                            default_text=globals.baseRecord[0][inputKey], 
+                            disabled=True 
+                        )]
+                    )
+                except:
+                    col2.append(
+                        [sg.InputText(
+                            key = inputKey,
+                            font=text_style["font"], 
+                            disabled=True 
+                        )]
+                    )
             elif (value["type"] == "date"):
-                col2.append(
-                    [sg.InputText(
-                        key=inputKey, 
-                        disabled=True, 
-                        font=text_style["font"],
-                        default_text=globals.baseRecord[0][inputKey] 
-                    )]
-                )
+                try:
+                    col2.append(
+                        [sg.InputText(
+                            key=inputKey, 
+                            disabled=True, 
+                            font=text_style["font"],
+                            default_text=globals.baseRecord[0][inputKey] 
+                        )]
+                    )
+                except:
+                    col2.append(
+                        [sg.InputText(
+                            key=inputKey, 
+                            disabled=True, 
+                            font=text_style["font"],
+                        )]
+                    )
 
     inputFields.append([sg.Column(col1), sg.Column(col2)])
     return inputFields
