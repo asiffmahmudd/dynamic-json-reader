@@ -1,7 +1,4 @@
-import globalStore.globals as globals
 from validation.isEmpty import isEmpty
-from validation.isInt import isInt
-from validation.isDate import isDate
 
 def isValid(values, struct, actionOn=""):
     fields = list(struct.keys())
@@ -15,18 +12,20 @@ def isValid(values, struct, actionOn=""):
         if struct[inputKey]["required"] == "true" and isEmpty(values[inputKey+actionOn]):
             errorCode = 1
             errorMsg += inputKey + " cannot be empty!\n"
-        elif struct[inputKey]["type"] == "textfield" and struct[inputKey]["isNumeric"] == "true":
-            
+        elif struct[inputKey]["type"] == "double":            
+            try:
+                # Convert it into float
+                validData[inputKey] = float(values[inputKey+actionOn])
+            except ValueError:
+                errorCode = 1
+                errorMsg += inputKey + " is invalid!\n"
+        elif struct[inputKey]["type"] == "int":
             try:
                 # Convert it into integer
                 validData[inputKey] = int(values[inputKey+actionOn])
             except ValueError:
-                try:
-                    # Convert it into float
-                    validData[inputKey] = float(values[inputKey+actionOn])
-                except ValueError:
-                    errorCode = 1
-                    errorMsg += inputKey + " is invalid!\n"
+                errorCode = 1
+                errorMsg += inputKey + " is invalid!\n"
     #     elif globals.dataTypes[inputKey] == 'date':
     #         if not isDate(values[inputKey]):
     #             errorCode = 1

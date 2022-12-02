@@ -12,7 +12,7 @@ def addData(values):
     if errorCode == 1:
         sg.popup(errorMsg)
     else:
-        writeToMongoDB(validData, globals.historyCollection)
+        writeToMongoDB(validData, globals.config["app-params"]["historyCollection"])
         clearInputs()
         # listKey = list(globals.data.keys())[0]
         globals.data.append(validData)

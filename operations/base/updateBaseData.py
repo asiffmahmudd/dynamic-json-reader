@@ -13,21 +13,21 @@ def updateBaseData(index):
     if errorCode == 1:
         sg.popup(errorMsg)
     else:
-        oldVal = globals.baseRecord[index][globals.primaryKey]
+        oldVal = globals.baseRecord[index][globals.config["app-params"]["primaryKey"]]
         for key,val in validData.items():
             globals.baseRecord[index][key] = val
         updateBaseInMongo(validData, index)
         for key, value in globals.baseStruct.items():
-            if key != "_id" and value["type"] == "dropdown":
+            if key != "_id" and value["control"] == "dropdown":
                 new_values = getNewDropDownValues(key)
                 updateDropdownSeeds(new_values, globals.config['seed-collection']['CollectionName'])
-                if key == globals.primaryKey:
+                if key == globals.config["app-params"]["primaryKey"]:
                     try:
-                        updateChildDataInMongo(globals.historyCollection, key, oldVal, globals.baseRecord[index][key])
+                        updateChildDataInMongo(globals.config["app-params"]["historyCollection"], key, oldVal, globals.baseRecord[index][key])
                         globals.window[key].Update(values=new_values, value=new_values[0])
                     except Exception as e:
                         globals.window[key].Update(values=new_values)
-        updateGlobalHistoryData(oldVal, globals.baseRecord[index][globals.primaryKey])
+        updateGlobalHistoryData(oldVal, globals.baseRecord[index][globals.config["app-params"]["primaryKey"]])
         updateBaseTableData()
         updateTableData()
         clearBaseInputs("base")
@@ -40,6 +40,6 @@ def getNewDropDownValues(key):
 def updateGlobalHistoryData(oldVal, newVal):
     index = 0
     for doc in globals.data:
-        if doc[globals.primaryKey] == oldVal:
-            globals.data[index][globals.primaryKey] = newVal
+        if doc[globals.config["app-params"]["primaryKey"]] == oldVal:
+            globals.data[index][globals.config["app-params"]["primaryKey"]] = newVal
         index += 1

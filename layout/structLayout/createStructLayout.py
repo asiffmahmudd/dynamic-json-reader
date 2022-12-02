@@ -22,7 +22,7 @@ def createStructLayout(record, actionOn):
                     font=text_style["font"],
                 )]
             )
-            if (value["type"] == 'dropdown'):
+            if (value["control"] == 'dropdown'):
                 dropDownValues = getDropDownValues(inputKey)
                 try:
                     col2.append(
@@ -43,14 +43,14 @@ def createStructLayout(record, actionOn):
                             enable_events=True
                         )]
                     )
-            elif (value["type"] == 'textfield'):
+            elif (value["control"] == 'textfield'):
                 col2.append(
                     [sg.InputText(
                         key = inputKey,
                         font=text_style["font"], 
                     )]
                 )
-            elif (value["type"] == "date"):
+            elif (value["control"] == "date"):
                 col2.append(
                     [sg.InputText(
                         key=inputKey, 
@@ -76,7 +76,7 @@ def createStructLayout(record, actionOn):
                     font=text_style["font"],
                 )]
             )
-            if (value["type"] == 'dropdown'):
+            if (value["control"] == 'dropdown'):
                 dropDownValues = getDropDownValues(inputKey)
                 try:
                     col2.append(
@@ -97,7 +97,7 @@ def createStructLayout(record, actionOn):
                             enable_events=True
                         )]
                     )
-            elif (value["type"] == 'textfield'):
+            elif (value["control"] == 'textfield'):
                 try:
                     col2.append(
                         [sg.InputText(
@@ -115,7 +115,7 @@ def createStructLayout(record, actionOn):
                             disabled=True 
                         )]
                     )
-            elif (value["type"] == "date"):
+            elif (value["control"] == "date"):
                 try:
                     col2.append(
                         [sg.InputText(

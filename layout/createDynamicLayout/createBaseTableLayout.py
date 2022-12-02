@@ -9,7 +9,7 @@ from operations.getDropDownValues import getDropDownValues
 #function: Edit tab layout for editing users
 def createTableLayout(actionOn):
     text_style = default_text_style()
-    record = getStructFromMongo(globals.baseStructCollection)
+    record = getStructFromMongo(globals.config["app-params"]["baseStructCollection"])
     record.pop("_id")
     data_headings = list(record.keys())
     

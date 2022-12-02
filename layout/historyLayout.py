@@ -9,17 +9,16 @@ from layout.statusBar.createStatusBarLayout import createStatusBarLayout
 
 def historyLayout():
     buttonMenu = buttonM('')
-    baseStructRecord = getStructFromMongo(globals.baseStructCollection)
-    baseRecord = getBaseRecordFromMongo(globals.baseRecordCollection)
+    baseStructRecord = getStructFromMongo(globals.config["app-params"]["baseStructCollection"])
+    baseRecord = getBaseRecordFromMongo(globals.config["app-params"]["baseRecordCollection"])
     for record in baseRecord:
         globals.baseRecord.append(record)
 
-    globals.primaryKey = list(baseStructRecord.keys())[1]
     globals.baseStruct = saveStruct(baseStructRecord)
 
-    historyStructRecord = getStructFromMongo(globals.historyStructCollection)
+    historyStructRecord = getStructFromMongo(globals.config["app-params"]["historyStructCollection"])
     globals.historyStruct = saveStruct(historyStructRecord)
-    historyStructRecord.pop(globals.primaryKey)
+    historyStructRecord.pop(globals.config["app-params"]["primaryKey"])
 
     baseStructLayout = createStructLayout(baseStructRecord, "base")
     historyStructLayout = createStructLayout(historyStructRecord, "")

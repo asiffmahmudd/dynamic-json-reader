@@ -14,21 +14,20 @@ def createBaseLayout(record, actionOn):
 
     for inputKey, value in record.items():
         text = inputKey.replace("_", " ").title()
-    
         col1.append(
             [sg.Push(),sg.Text(
                 text,
                 font=text_style["font"],
             )]
         )
-        if (value["type"] == 'textfield') or (value["type"] == 'dropdown'):
+        if (value["control"] == 'textfield') or (value["control"] == 'dropdown'):
             col2.append(
                 [sg.InputText(
                     key = inputKey+actionOn,
                     font=text_style["font"], 
                 )]
             )
-        elif (value["type"] == "date"):
+        elif (value["control"] == "date"):
             col2.append(
                 [sg.InputText(
                     key=inputKey+actionOn, 

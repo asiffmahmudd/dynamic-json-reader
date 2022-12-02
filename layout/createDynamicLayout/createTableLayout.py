@@ -9,14 +9,14 @@ from operations.getDropDownValues import getDropDownValues
 #function: Edit tab layout for editing users
 def createTableLayout():
     text_style = default_text_style()
-    record = getStructFromMongo(globals.historyStructCollection)
+    record = getStructFromMongo(globals.config["app-params"]["historyStructCollection"])
     record.pop("_id")
     data_headings = list(record.keys())
     
-    values = getDropDownValues(globals.primaryKey)
+    values = getDropDownValues(globals.config["app-params"]["primaryKey"])
     if len(values) > 0:
         keyValue = values[0]
-        data = getHistory(globals.primaryKey, keyValue)
+        data = getHistory(globals.config["app-params"]["primaryKey"], keyValue)
         tableData = processDataForTable(data)
     else:
         tableData = ""

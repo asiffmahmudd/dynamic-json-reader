@@ -10,7 +10,7 @@ from layout.statusBar.createStatusBarLayout import createStatusBarLayout
 
 def baseLayout():
     buttonMenu = buttonM('base')
-    baseStructRecord = getStructFromMongo(globals.baseStructCollection)
+    baseStructRecord = getStructFromMongo(globals.config["app-params"]["baseStructCollection"])
 
     baseLayout = createBaseLayout(baseStructRecord, "base")
     tableLayout = createTableLayout('base')

@@ -47,12 +47,12 @@ def handleEvents(event, values):
             populateInputFields(selectedData)
         except Exception as e:
             return
-    elif event == globals.primaryKey:
+    elif event == globals.config["app-params"]["primaryKey"]:
         globals.data = []
-        getHistory(globals.primaryKey, values[event])
+        getHistory(globals.config["app-params"]["primaryKey"], values[event])
         temp = None
         for record in globals.baseRecord:
-            if record[globals.primaryKey] == values[event]:
+            if record[globals.config["app-params"]["primaryKey"]] == values[event]:
                 temp = record
         populateInputFields(temp)
         clearInputs()
@@ -95,7 +95,6 @@ def handleEvents(event, values):
 #function: main function. the app starts here
 if __name__ == "__main__":  
     connectToDatabase()
-
     layout = [
         [
             sg.Column(historyLayout(), visible=True, key='-HISTORY_LAYOUT-'), 
