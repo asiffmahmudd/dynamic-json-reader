@@ -16,7 +16,7 @@ def baseLayout():
     tableLayout = createTableLayout('base')
     statuBarLayout = createStatusBarLayout("Parent")
 
-    layout = buttonMenu + baseLayout + tableLayout + statuBarLayout
+    layout = buttonMenu + baseLayout + tableLayout + [[sg.Push()]] + statuBarLayout
     return layout
 
 def saveStruct(record):

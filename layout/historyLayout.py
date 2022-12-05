@@ -25,7 +25,7 @@ def historyLayout():
     tableLayout = createTableLayout()
     statuBarLayout = createStatusBarLayout("Child")
 
-    layout = buttonMenu + [[sg.Frame('Cathod-Base',baseStructLayout)]] + [[sg.Frame('Cathod-History',historyStructLayout)]] + tableLayout + statuBarLayout
+    layout = buttonMenu + [[sg.Frame('Parent',baseStructLayout)]] + [[sg.Frame('Child',historyStructLayout)]] + tableLayout + statuBarLayout
     return layout
 
 def saveStruct(record):

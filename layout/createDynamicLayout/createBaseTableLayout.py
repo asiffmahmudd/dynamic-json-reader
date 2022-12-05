@@ -20,8 +20,8 @@ def createTableLayout(actionOn):
             sg.Table(
                 values=tableData, 
                 headings=data_headings,
-                max_col_width=18,
-                def_col_width=18,
+                max_col_width=32,
+                def_col_width=32,
                 auto_size_columns=False,
                 display_row_numbers=True,
                 vertical_scroll_only=False,

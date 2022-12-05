@@ -17,3 +17,4 @@ def addData(values):
         # listKey = list(globals.data.keys())[0]
         globals.data.append(validData)
         updateTableData()
+        sg.popup("Added Successfully!")
