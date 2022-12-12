@@ -55,7 +55,7 @@ def createStructLayout(record, actionOn):
                     [sg.InputText(
                         key=inputKey, 
                         disabled=True, 
-                        font=text_style["font"], 
+                        font=text_style["font"]
                     ),
                     sg.CalendarButton(
                         "Date", 
@@ -64,6 +64,15 @@ def createStructLayout(record, actionOn):
                         no_titlebar=False, 
                         font=("Arial", 12),
                         size=(10,1)
+                    )]
+                )
+            elif (value["control"] == "checkbox"):
+                col2.append(
+                    [sg.Checkbox(
+                        "",
+                        key = inputKey,
+                        font=text_style["font"], 
+                        enable_events=True
                     )]
                 )
     else:
@@ -131,6 +140,26 @@ def createStructLayout(record, actionOn):
                             key=inputKey, 
                             disabled=True, 
                             font=text_style["font"],
+                        )]
+                    )
+            elif (value["control"] == "checkbox"):
+                if globals.baseRecord[0][inputKey]:
+                    col2.append(
+                        [sg.Checkbox(
+                            "",
+                            disabled=True,
+                            key = inputKey,
+                            font=text_style["font"],
+                            default=True
+                        )]
+                    )
+                else:
+                    col2.append(
+                        [sg.Checkbox(
+                            "",
+                            disabled=True,
+                            key = inputKey,
+                            font=text_style["font"]
                         )]
                     )
 

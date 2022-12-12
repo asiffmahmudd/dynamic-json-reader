@@ -20,7 +20,18 @@ from layout.statusBar.createStatusBarLayout import createStatusBarLayout
 
 selectedIndex = -1
 selectedIndexBase = -1
-sg.theme('DarkGrey5')
+sg.theme('DarkBlack1')
+
+def updateGlobalsAndTableData(key, value):
+    getHistory(key, value)
+    temp = None
+    for record in globals.baseRecord:
+        if record[globals.config["app-params"]["primaryKey"]] == value:
+            temp = record
+    populateInputFields(temp)
+    clearInputs()
+    selectedIndex = -1
+    updateTableData()
 
 def handleEvents(event, values):
     global selectedIndex
@@ -52,15 +63,7 @@ def handleEvents(event, values):
             return
     elif event == globals.config["app-params"]["primaryKey"]:
         globals.data = []
-        getHistory(globals.config["app-params"]["primaryKey"], values[event])
-        temp = None
-        for record in globals.baseRecord:
-            if record[globals.config["app-params"]["primaryKey"]] == values[event]:
-                temp = record
-        populateInputFields(temp)
-        clearInputs()
-        selectedIndex = -1
-        updateTableData()
+        updateGlobalsAndTableData(globals.config["app-params"]["primaryKey"], values[event])
 
     elif event == '-TOGGLE_CRUD-' or event == '-TOGGLE_CRUD-1':
         clearInputs()
@@ -71,23 +74,23 @@ def handleEvents(event, values):
 
     elif event == '-ADD_BTN-base':
         addBaseData(values)
-        selectedData = globals.data[0]
-        populateInputFields(selectedData)
+        primaryKey = globals.config["app-params"]["primaryKey"]
+        updateGlobalsAndTableData(primaryKey, globals.baseRecord[0][primaryKey])
     elif event == '-UPDATE_BTN-base':
         if selectedIndexBase > -1:
             isUpdated = updateBaseData(selectedIndexBase)
             if isUpdated:
                 sg.popup("Update successful!")
-                selectedData = globals.data[0]
-                populateInputFields(selectedData)
+                primaryKey = globals.config["app-params"]["primaryKey"]
+                updateGlobalsAndTableData(primaryKey, globals.baseRecord[0][primaryKey])
                 selectedIndexBase = -1
         else:
             sg.popup("No row selected from the table")
     elif event == '-DELETE_BTN-base':
         if selectedIndexBase > -1:
             deleteBaseData(selectedIndexBase)
-            selectedData = globals.data[0]
-            populateInputFields(selectedData)
+            primaryKey = globals.config["app-params"]["primaryKey"]
+            updateGlobalsAndTableData(primaryKey, globals.baseRecord[0][primaryKey])
             clearBaseInputs("base")
             sg.popup("Deleted successfully!")
         else:
@@ -110,8 +113,8 @@ if __name__ == "__main__":
             # [sg.Push()],
             [   
                 # sg.Push(),
-                sg.Column(historyLayout(), element_justification='center', visible=True, key='-HISTORY_LAYOUT-', scrollable=True,  vertical_scroll_only=True, size=(1400, 750)), 
-                sg.Column(baseLayout(), element_justification='center', visible=False, key='-BASE_LAYOUT-', scrollable=True,  vertical_scroll_only=True, size=(1400, 750)),
+                sg.Column(historyLayout(), element_justification='center', visible=True, key='-HISTORY_LAYOUT-', scrollable=True,  vertical_scroll_only=False, size=(1400, 750)), 
+                sg.Column(baseLayout(), element_justification='center', visible=False, key='-BASE_LAYOUT-', scrollable=True,  vertical_scroll_only=False, size=(1400, 750)),
             ],
             # [sg.Push()]
         ]
@@ -120,13 +123,14 @@ if __name__ == "__main__":
             # [sg.Push()],
             [   
                 # sg.Push(),
-                sg.Column(historyLayout(), element_justification='center', visible=False, key='-HISTORY_LAYOUT-', scrollable=True,  vertical_scroll_only=True, size=(1400, 750)), 
-                sg.Column(baseLayout(), element_justification='center', visible=True, key='-BASE_LAYOUT-', scrollable=True,  vertical_scroll_only=True, size=(1400, 750)),
+                sg.Column(historyLayout(), element_justification='center', visible=False, key='-HISTORY_LAYOUT-', scrollable=True,  vertical_scroll_only=False, size=(1400, 750)), 
+                sg.Column(baseLayout(), element_justification='center', visible=True, key='-BASE_LAYOUT-', scrollable=True,  vertical_scroll_only=False, size=(1400, 750)),
             ],
             # [sg.Push()]
         ]
     
     globals.window = sg.Window('Dynamic CRUD', layout, size=(1400, 750), element_justification="center")
+    
     while True:
 
         globals.event, globals.values = globals.window.read()

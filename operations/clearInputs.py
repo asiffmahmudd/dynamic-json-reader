@@ -6,4 +6,7 @@ def clearInputs():
     fields.remove("_id")
     fields.remove(globals.config["app-params"]["primaryKey"])
     for inputKey in fields:
-        globals.window[inputKey].update('')
+        try:
+            globals.window[inputKey].update('')
+        except:
+            globals.window[inputKey].update(value = False)

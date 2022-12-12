@@ -12,7 +12,7 @@ def createTableLayout(actionOn):
     record = getStructFromMongo(globals.config["app-params"]["baseStructCollection"])
     record.pop("_id")
     data_headings = list(record.keys())
-    
+    col_width = int(100/len(globals.baseStruct)) + 4
     tableData = processDataForTable(globals.baseRecord)
 
     return [
@@ -20,8 +20,8 @@ def createTableLayout(actionOn):
             sg.Table(
                 values=tableData, 
                 headings=data_headings,
-                max_col_width=32,
-                def_col_width=32,
+                max_col_width=col_width,
+                def_col_width=col_width,
                 auto_size_columns=False,
                 display_row_numbers=True,
                 vertical_scroll_only=False,

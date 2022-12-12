@@ -4,7 +4,6 @@ from layout.createDynamicLayout.createTableLayout import createTableLayout
 import PySimpleGUI as sg
 import globalStore.globals as globals
 from operations.getStructFromMongo import getStructFromMongo
-from operations.base.getBaseRecordFromMongo import getBaseRecordFromMongo
 from layout.createDynamicLayout.createBaseTableLayout import createTableLayout
 from layout.statusBar.createStatusBarLayout import createStatusBarLayout
 

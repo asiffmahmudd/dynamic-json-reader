@@ -12,6 +12,7 @@ def createTableLayout():
     record = getStructFromMongo(globals.config["app-params"]["historyStructCollection"])
     record.pop("_id")
     data_headings = list(record.keys())
+    col_width = int(100/len(globals.historyStruct)) + 2
     
     values = getDropDownValues(globals.config["app-params"]["primaryKey"])
     if len(values) > 0:
@@ -25,8 +26,8 @@ def createTableLayout():
             sg.Table(
                 values=tableData, 
                 headings=data_headings,
-                max_col_width=14,
-                def_col_width=14,
+                max_col_width=col_width,
+                def_col_width=col_width,
                 auto_size_columns=False,
                 display_row_numbers=True,
                 vertical_scroll_only=False,

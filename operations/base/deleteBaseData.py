@@ -8,7 +8,8 @@ import PySimpleGUI as sg
 
 def deleteBaseData(index):
     deleteBaseDataFromMongo(globals.baseRecord[index]["_id"])
-    deleteChildData(globals.config["app-params"]["historyCollection"], globals.baseRecord[index][globals.config["app-params"]["primaryKey"]])
+    if globals.config['app-params']['CanCascadeDelete'] == '1':
+        deleteChildData(globals.config["app-params"]["historyCollection"], globals.baseRecord[index][globals.config["app-params"]["primaryKey"]])
     for key, value in globals.baseStruct.items():
         if key != "_id" and value["control"] == "dropdown":
             deleteBaseDataFromDropdownSeed(globals.values[key+'base'], key, globals.config['seed-collection']['CollectionName'])

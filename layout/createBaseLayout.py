@@ -43,6 +43,15 @@ def createBaseLayout(record, actionOn):
                     size=(10,1)
                 )]
             )
+        elif (value["control"] == "checkbox"):
+                col2.append(
+                    [sg.Checkbox(
+                        "",
+                        key = inputKey+actionOn,
+                        font=text_style["font"], 
+                        enable_events=True
+                    )]
+                )
 
     inputFields.append([sg.Column(col1), sg.Column(col2)])
     return inputFields

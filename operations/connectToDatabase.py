@@ -7,7 +7,7 @@ def connectToDatabase():
     # configFilePath = r'config.ini'
     globals.config.read("config.ini")
     #Creating a pymongo client
-    client = MongoClient(globals.config['Mongo']['ParentConnStr'])
+    client = MongoClient(globals.config['Mongo']['ParentConnStr'] + "/" + globals.config['Mongo']['SourceDatabase'])
 
     #Getting the database instance
     globals.database = client["PERIPHERALS"]
