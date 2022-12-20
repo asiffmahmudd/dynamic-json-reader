@@ -1,3 +1,4 @@
+# [am-09] process table data so that all infos can be appended to table rows
 def processDataForTable(data): 
     temp = []
     for row in data:

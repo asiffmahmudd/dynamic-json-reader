@@ -2,6 +2,7 @@ import PIL.Image
 import io
 import base64       
 
+# [am-32] function for resizing image for the toggle button
 def resize_image(image_path, resize=None):
     if isinstance(image_path, str):
         img = PIL.Image.open(image_path)

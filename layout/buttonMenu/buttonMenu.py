@@ -4,12 +4,15 @@ from operations.resizeImage import resize_image
 from styles.defaultStyles import default_text_style
 import globalStore.globals as globals
 
+# [am-34] button menu layout main function
 def buttonM(actionOn):
-    
+    #getting default style 
     btn_style = default_btn_style()
     text_style = default_text_style()
+    # path to toggle button off image
     toggle_btn_path = 'images/off-btn.png'
     if actionOn == 'base':
+        # path to toggle button on image
         toggle_btn_path = 'images/on-btn.png'
     buttonLayout = [
         sg.Button(
@@ -41,6 +44,7 @@ def buttonM(actionOn):
             visible=True
         ),
     ]
+    # checking if isParentChild active. if it's active then show the toggle button
     if globals.config["app-params"]["isParentChild"] == "1":
         buttonLayout.append(sg.Push())
         buttonLayout.append(

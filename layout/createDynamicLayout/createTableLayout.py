@@ -6,14 +6,19 @@ from operations.getStructFromMongo import getStructFromMongo
 from operations.getHistory import getHistory
 from operations.getDropDownValues import getDropDownValues
 
-#function: Edit tab layout for editing users
+# [am-37] table layout main function
 def createTableLayout():
     text_style = default_text_style()
+    # get the structure for child from database
     record = getStructFromMongo(globals.config["app-params"]["historyStructCollection"])
+    # removing id as we are not going to show it on the UI
     record.pop("_id")
+    # headers for table columns
     data_headings = list(record.keys())
+    # defining column widths based on number of fields
     col_width = int(100/len(globals.historyStruct)) + 2
     
+    # getting the dropdown values for primary key
     values = getDropDownValues(globals.config["app-params"]["primaryKey"])
     if len(values) > 0:
         keyValue = values[0]

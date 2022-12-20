@@ -1,8 +1,5 @@
-from operations.getStructFromMongo import getStructFromMongo
-from operations.getDropDownValues import getDropDownValues
 import PySimpleGUI as sg
 from styles.defaultStyles import default_text_style
-import globalStore.globals as globals
 
 def createBaseLayout(record, actionOn):
     

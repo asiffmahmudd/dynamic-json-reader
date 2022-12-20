@@ -4,7 +4,6 @@ from styles.defaultStyles import default_text_style
 from operations.processDataForTable import processDataForTable
 from operations.getStructFromMongo import getStructFromMongo
 from operations.getHistory import getHistory
-from operations.getDropDownValues import getDropDownValues
 
 #function: Edit tab layout for editing users
 def createTableLayout(actionOn):
